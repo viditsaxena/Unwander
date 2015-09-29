@@ -1,8 +1,8 @@
 class ReservationsController < ApplicationController
 
-  # skip_before_filter  :verify_authenticity_token, only: [:accept_or_reject, :connect_guest_to_host_sms, :connect_guest_to_host_voice]
-  # before_action :set_twilio_params, only: [:connect_guest_to_host_sms, :connect_guest_to_host_voice]
-  # before_filter :authenticate_user, only: [:index]
+  skip_before_filter  :verify_authenticity_token, only: [:accept_or_reject, :connect_guest_to_host_sms, :connect_guest_to_host_voice]
+  before_action :set_twilio_params, only: [:connect_guest_to_host_sms, :connect_guest_to_host_voice]
+  before_filter :authenticate_user, only: [:index]
 
 
 
@@ -16,16 +16,19 @@ class ReservationsController < ApplicationController
   end
 
   def create
-  @itinerary = Itinerary.find(params[:reservation][:itinerary_id])
-  @reservation = @itinerary.reservations.create(reservation_params)
+    @itinerary = Itinerary.find(params[:reservation][:itinerary_id])
+    # byebug
+    @reservation = @itinerary.reservations.new(reservation_params)
 
+    # @reservation.save!
 
-      if @reservation.save
+  # byebug
+      if @reservation.save!
         flash[:notice] = "Sending your reservation request now."
         @reservation.host.check_for_reservations_pending
         redirect_to '/itineraries'
       else
-    
+        # render :index
         flash[:danger] = @reservation.errors
       end
 
@@ -100,7 +103,7 @@ class ReservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
   def reservation_params
-      params.require(:reservation).permit(:name, :phone_number, :message)
+      params.require(:reservation).permit(:name, :guest_phone, :message, :itinerary_id)
   end
 
     # Load up Twilio parameters
