@@ -1,60 +1,64 @@
 class Reservation < ActiveRecord::Base
-   validates :name, presence: true
-   validates :phone_number, presence: true
+  validates :name, presence: true
+  validates :guest_phone, presence: true
 
-   enum status: [ :pending, :confirmed, :rejected ]
+  enum status: [ :pending, :confirmed, :rejected ]
 
-   belongs_to :itinerary
-   belongs_to :user
+  belongs_to :itinerary
+  belongs_to :user
 
-   def notify_host(force = false)
-   @host = User.find(self.itinerary[:user_id])
+  def notify_host(force = false)
+    # Don't send the message if we have more than one and we aren't being forced
+    if self.host.pending_reservations.length > 1 and !force
+      return
+    else
+      message = "You have a new reservation request from #{self.name} for #{self.itinerary.description}:
 
-        # Don't send the message if we have more than one or we aren't being forced
-        if @host.pending_reservations.length > 1 or !force
-          return
-        else
-          message = "You have a new reservation request from #{self.name} for #{self.itinerary.description}:
+      '#{self.message}'
 
-          '#{self.message}'
+      Reply [accept] or [reject]."
 
-          Reply [accept] or [reject]."
+      self.host.send_message_via_sms(message)
+    end
+  end
 
-          @host.send_message_via_sms(message)
-        end
-   end
+  def host
+    @host = User.find(self.itinerary[:user_id])
+  end
 
-   def confirm!
-   provision_phone_number
-   self.update!(status: "confirmed")
-   end
+  def guest
+    @guest = User.find_by(phone_number: self.guest_phone)
+  end
 
-   def reject!
-     self.update!(status: "rejected")
-   end
+  def confirm!
+    provision_phone_number
+    self.update!(status: "confirmed")
+  end
 
-   def notify_guest
-    @guest = User.find_by(phone_number: self.phone_number)
+  def reject!
+    self.update!(status: "rejected")
+  end
 
-        if self.status_changed? && (self.status == "confirmed" || self.status == "rejected")
+  def notify_guest
+    if self.status_changed? && (self.status == "confirmed" || self.status == "rejected")
       message = "Your recent request to stay at #{self.itinerary.description} was #{self.status}."
-      @guest.send_message_via_sms(message)
-        end
-   end
+      self.guest.send_message_via_sms(message)
+    end
+  end
 
-   def send_message_to_guest(message)
-     message = "From #{self.host.name}: #{message}"
-     self.guest.send_message_via_sms(message, self.phone_number)
-   end
+  def send_message_to_guest(message)
+    message = "From #{self.host.name}: #{message}"
+    self.guest.send_message_via_sms(message, self.phone_number)
+  end
 
-   def send_message_to_host(message)
-     message = "From guest #{self.guest.name}: #{message}"
-     self.host.send_message_via_sms(message, self.phone_number)
-   end
+  def send_message_to_host(message)
+    message = "From guest #{self.guest.name}: #{message}"
+    self.host.send_message_via_sms(message, self.phone_number)
+  end
 
-   private
+  private
 
-   def provision_phone_number
+  def provision_phone_number
     @client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
     begin
       # Lookup numbers in host area code, if none than lookup from anywhere
@@ -68,8 +72,8 @@ class Reservation < ActiveRecord::Base
       @number = @numbers.first.phone_number
       @anon_number = @client.account.incoming_phone_numbers.create(
         :phone_number => @number,
-        :voice_application_sid => ENV['ANONYMOUS_APPLICATION_SID'],
-        :sms_application_sid => ENV['ANONYMOUS_APPLICATION_SID']
+        :voice_application_sid => ENV['UNWANDER_APPLICATION_SID'],
+        :sms_application_sid => ENV['UNWANDER_APPLICATION_SID']
       )
 
       # Set the reservation.phone_number
@@ -79,5 +83,4 @@ class Reservation < ActiveRecord::Base
       puts "ERROR: #{e.message}"
     end
   end
-
 end

@@ -1,8 +1,8 @@
 class ReservationsController < ApplicationController
 
-  skip_before_filter  :verify_authenticity_token, only: [:accept_or_reject, :connect_guest_to_host_sms, :connect_guest_to_host_voice]
-  before_action :set_twilio_params, only: [:connect_guest_to_host_sms, :connect_guest_to_host_voice]
-  before_filter :authenticate_user, only: [:index]
+  # skip_before_filter  :verify_authenticity_token, only: [:accept_or_reject, :connect_guest_to_host_sms, :connect_guest_to_host_voice]
+  # before_action :set_twilio_params, only: [:connect_guest_to_host_sms, :connect_guest_to_host_voice]
+  # before_filter :authenticate_user, only: [:index]
 
 
 
@@ -19,11 +19,13 @@ class ReservationsController < ApplicationController
   @itinerary = Itinerary.find(params[:reservation][:itinerary_id])
   @reservation = @itinerary.reservations.create(reservation_params)
 
+
       if @reservation.save
         flash[:notice] = "Sending your reservation request now."
         @reservation.host.check_for_reservations_pending
         redirect_to '/itineraries'
       else
+    
         flash[:danger] = @reservation.errors
       end
 
