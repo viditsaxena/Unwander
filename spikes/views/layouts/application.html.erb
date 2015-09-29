@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Unwander</title>
+
+
+  <%= stylesheet_link_tag    '//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    '//fonts.googleapis.com/icon?family=Material+Icons', media: 'all', 'data-turbolinks-track' => true %>
+
+  <%= stylesheet_link_tag    '//cdnjs.cloudflare.com/ajax/libs/authy-forms.css/2.2/form.authy.min.css', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
+  <%= javascript_include_tag '//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js', 'data-turbolinks-track' => true %>
+
+
+  <%= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/authy-forms.js/2.2/form.authy.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>
