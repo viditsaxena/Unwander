@@ -32,6 +32,7 @@ gem 'twilio-ruby'
 # Use sanitize
 gem 'sanitize'
 
+gem 'figaro', '~> 1.1.1'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
