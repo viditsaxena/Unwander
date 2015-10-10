@@ -4,6 +4,8 @@
   <title>Unwander -  The New Way To Plan Your Travels</title>
   <%= stylesheet_link_tag    '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag    '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    '//fonts.googleapis.com/css?family=Caveat+Brush', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    '//fonts.googleapis.com/css?family=Sarala:700', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag    '//cdnjs.cloudflare.com/ajax/libs/authy-forms.css/2.2/form.authy.min.css', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/authy-forms.js/2.2/form.authy.min.js', 'data-turbolinks-track' => true %>
@@ -14,7 +16,7 @@
   <%= yield :nav_bg %>
     <!-- Nav Bar -->
     <nav class="navbar navbar-transparent">
-      <a class="navbar-brand" href="/">Unwander</a>
+      <a class="navbar-brand" href="/">UnWander</a>
       <ul class="navbar-nav navbar-right pull-right">
         <% if signed_in? %>
           <li><%= image_tag("spock.png") %></li>
@@ -37,10 +39,10 @@
     <%= yield %>
   </section>
 
-  <footer>
+  <!-- <footer>
     Made with <i class="fa fa-heart"></i>by
     <a href="http://www.unwander.com">@unwander</a>
-  </footer>
+  </footer> -->
 
 </body>
 </html>
