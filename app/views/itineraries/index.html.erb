@@ -11,7 +11,8 @@
         <a href="/itineraries/<%= itinerary.id %>" class="itinerary">
 
           <img src="<%= itinerary.image_url %>" />
-          <h2><strong><%= itinerary.description %></strong></h2>
+          <h2><%= itinerary.description %></h2>
+          <h2><%= itinerary.location %></h2>
         </a>
       </div>
     <% end %>
