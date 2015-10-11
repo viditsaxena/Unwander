@@ -48,7 +48,7 @@ class ReservationsController < ApplicationController
         @reservation.reject!
       end
 
-      # @host.check_for_reservations_pending
+      @host.check_for_reservations_pending
       @reservation.notify_guest
 
       sms_reponse = "You have successfully #{@reservation.status} the reservation."

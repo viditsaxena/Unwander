@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   end
 
   def pending_reservation
-    self.reservations.where(status: "pending").last
+    self.reservations.where(status: "pending").first
   end
 
   def pending_reservations

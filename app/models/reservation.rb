@@ -31,7 +31,7 @@ class Reservation < ActiveRecord::Base
   end
 
   def confirm!
-    provision_phone_number
+    # provision_phone_number
     self.update!(status: "confirmed")
   end
 
