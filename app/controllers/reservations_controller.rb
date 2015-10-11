@@ -52,6 +52,8 @@ class ReservationsController < ApplicationController
 
       sms_reponse = "You have successfully #{@reservation.status} the reservation."
       respond(sms_reponse)
+      # @reservation.notify_guest
+
     rescue
       sms_reponse = "Sorry, it looks like you don't have any reservations to respond to."
       respond(sms_reponse)
