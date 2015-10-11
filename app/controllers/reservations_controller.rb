@@ -44,12 +44,13 @@ class ReservationsController < ApplicationController
 
       if sms_input == "accept" || sms_input == "yes"
         @reservation.confirm!
+        @reservation.send_message_to_guest("Hi, this is guest. We can chat here")
       else
         @reservation.reject!
       end
 
       @host.check_for_reservations_pending
-      @reservation.notify_guest
+
 
       sms_reponse = "You have successfully #{@reservation.status} the reservation."
       respond(sms_reponse)
