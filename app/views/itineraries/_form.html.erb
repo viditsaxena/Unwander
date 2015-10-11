@@ -23,6 +23,14 @@
     <%= f.label :image_url %><br>
     <%= f.text_field :image_url, class: "form-control" %>
   </div>
+  <div class="form-group">
+    <%= f.label :map %><br>
+    <%= f.text_field :map, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :details %><br>
+    <%= f.text_area :details, size: "5x10", class: "form-control" %>
+  </div>
   <div class="actions">
     <%= f.submit 'Create Itinerary', class: 'btn btn-lg btn-primary' %>
   </div>

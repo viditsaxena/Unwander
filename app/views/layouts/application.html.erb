@@ -17,10 +17,10 @@
   <%= yield :nav_bg %>
     <!-- Nav Bar -->
     <nav class="navbar navbar-transparent">
-      <a class="navbar-brand" href="http://www.unwander.com">Unwander</a>
+      <a class="navbar-brand" href="/">Unwander</a>
       <ul class="navbar-nav navbar-right pull-right">
         <% if signed_in? %>
-          <!-- <li><%= image_tag("spock.png") %></li> -->
+          <li><%= link_to 'Home', 'http://www.unwander.com' %></li>
           <% if current_user.reservations.present? %>
             <li><%= link_to 'Reservations', '/reservations' %></li>
           <% end %>

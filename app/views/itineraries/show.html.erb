@@ -3,10 +3,12 @@
 <div class="itinerary-detail">
   <div class="overview">
     <img src="<%= @itinerary.image_url %>" />
+
   </div>
   <div class="container">
     <h1 ><%= @itinerary.description %></h1><span><%= link_to 'Edit', edit_itinerary_path(@itinerary) %></span>
     <hr>
+    <iframe id="iframe1" src="<%= @itinerary.map %>" width="1080" height="640" frameborder="0"></iframe>
     <% if @current_reservation %>
       <div class="panel panel-default">
         <div class="panel-heading">
