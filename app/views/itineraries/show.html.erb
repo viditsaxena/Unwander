@@ -3,12 +3,26 @@
 <div class="itinerary-detail">
   <div class="overview">
     <img src="<%= @itinerary.image_url %>" />
-
   </div>
   <div class="container">
-    <h1 ><%= @itinerary.description %></h1><span><%= link_to 'Edit', edit_itinerary_path(@itinerary) %></span>
-    <hr>
-    <iframe id="iframe1" src="<%= @itinerary.map %>" width="1080" height="640" frameborder="0"></iframe>
+    <!-- <hr> -->
+    <div class="row">
+
+      <div class="col-md-8">
+        <hr>
+        <iframe src="<%= @itinerary.map %>" width="720" height="480" frameborder="0" scrolling="no"></iframe>
+      </div>
+      <div class="col-md-4">
+        <br>
+        <h1 ><%= @itinerary.description %></h1><span><%= link_to 'Edit', edit_itinerary_path(@itinerary) %></span>
+        <hr>
+        <p><%= @itinerary.details %>
+        </p>
+      </div>
+    </div>
+    <!-- <h1 ><%= @itinerary.description %></h1><span><%= link_to 'Edit', edit_itinerary_path(@itinerary) %></span> -->
+    <!-- <hr> -->
+    <!-- <iframe id="iframe1" src="<%= @itinerary.map %>" width="1080" height="640" frameborder="0"></iframe> -->
     <% if @current_reservation %>
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -25,6 +39,7 @@
       </div>
       <li><%= @current_reservation.message %></li>
     <% else %>
+    <hr>
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Make a Reservation</h3>

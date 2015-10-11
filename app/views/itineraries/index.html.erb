@@ -1,11 +1,12 @@
 <% content_for :hero do %>
-  <div class="hero-text">
+  <div class="all-itineraries">
     <h2>See Sample Itineraries Made By <strong><u>Locals</u></strong></h2>
   </div>
 <% end %>
 <p id="notice"><%= notice %></p>
 <div class="container">
   <div class="row">
+
     <% @itineraries.each do |itinerary| %>
       <div class="col-md-4">
         <a href="/itineraries/<%= itinerary.id %>" class="itinerary">
@@ -16,5 +17,6 @@
         </a>
       </div>
     <% end %>
+
   </div>
 </div>

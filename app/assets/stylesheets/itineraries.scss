@@ -14,11 +14,11 @@ body.itinerary-page {
 .itinerary {
     display: block;
     position: relative;
-    // border-radius:10px;
+    border-radius:10px;
     text-align: center;
     padding-top: 88px;
-    height: 240px;
-    // width: 320px;
+    height: 320px;
+    width: 320px;
     // text-transform: uppercase;
     overflow:hidden;
     margin-bottom:20px;
@@ -28,7 +28,7 @@ body.itinerary-page {
         position: absolute;
         left:0px;
         top:0px;
-        // border-radius:10px;
+        border-radius:10px;
     }
     h4 {
         color:white;
@@ -49,5 +49,18 @@ body.itinerary-page {
     img {
         width:100%;
     }
-  
+
 }
+
+.all-itineraries {
+    // background: url(<%= asset_path('tngbg.jpg') %>);
+    background-color: #81d4fa;
+    margin: 0px;
+    top: 0px;
+    text-align: center;
+    padding: 130px;
+    color: white;
+    height: 300px;
+    overflow: hidden;
+    // background-size: cover;
+  }
