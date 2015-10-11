@@ -87,7 +87,7 @@ class ReservationsController < ApplicationController
       @outgoing_number = @reservation.guest.phone_number
     end
     response = Twilio::TwiML::Response.new do |r|
-      r.Play "http://howtodocs.s3.amazonaws.com/howdy-tng.mp3"
+      r.Play "http://vocaroo.com/i/s0IbTwjpFpZn"
       r.Dial @outgoing_number
     end
     render text: response.text
