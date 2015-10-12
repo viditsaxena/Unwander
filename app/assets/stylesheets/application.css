@@ -39,12 +39,11 @@ footer {
     margin-top:20px;
     padding-top:20px;
     text-align:center;
+    /*height: 100px;
+    background-color: black;*/
 }
 
-footer div {
-  height: 100px;
-  background-color: black;
-}
+
 
 footer i {
     color:#ff0000;
